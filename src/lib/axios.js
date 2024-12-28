@@ -1,5 +1,5 @@
-import config from "@/config/config";
-import { logout } from "@/service/auth";
+import config from "../config/config";
+import { logout } from "../service/auth.service";
 import axios from "axios";
 import Cookies from 'js-cookie';
 

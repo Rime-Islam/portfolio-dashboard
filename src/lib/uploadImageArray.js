@@ -1,6 +1,7 @@
-import config from "@/config";
+import config from "../config/config";
 
 export const uploadImagesToCloudinary = async (files) => {
+
   try {
     if (!files || files.length === 0) throw new Error("No files provided");
 
