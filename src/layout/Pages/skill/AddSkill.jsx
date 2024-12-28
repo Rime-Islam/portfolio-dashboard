@@ -1,10 +1,11 @@
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom"; 
+// import { useNavigate } from "react-router-dom"; 
 import { useAddSkill } from "../../../hooks/skills/skills.hook";
 import { uploadImagesToCloudinary } from "../../../lib/uploadImageArray";
+import ManageSkills from "./ManageSkills";
 
 const AddSkill = () => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const { mutate } = useAddSkill();
 
     const handleLogin = async(e) => {
@@ -29,7 +30,8 @@ const AddSkill = () => {
     return (
         <div>
             <h1 className="text-2xl font-semibold">Add your skills</h1>
-         <form onSubmit={handleLogin} className="card-body">
+        <div className="border my-8 rounded">
+        <form onSubmit={handleLogin} className="card-body">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Name</span>
@@ -46,6 +48,8 @@ const AddSkill = () => {
         <button type="submit" className="btn btn-success">Add Skill</button>
         </div>
       </form>
+        </div>
+      <ManageSkills />
         </div>
     )
 };
