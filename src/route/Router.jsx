@@ -5,6 +5,7 @@ import NotFound from "../layout/NotFound";
 import Home from "../layout/Pages/Home";
 import Login from "../layout/Pages/auth/Login";
 import AddSkill from "../layout/Pages/skill/AddSkill";
+import AddProject from "../layout/Pages/project/AddProject";
 
 const myRouter = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const myRouter = createBrowserRouter([
         {
             path: 'addskills',
             element: <AddSkill />
+        },
+        {
+            path: 'addprojects',
+            element: <AddProject />
         },
     ],
     

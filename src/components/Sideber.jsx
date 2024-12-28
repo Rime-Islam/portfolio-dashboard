@@ -52,7 +52,7 @@ const Sideber = () => {
               </Link>
             </li>
             <li className="px-4 cursor-pointer hover:bg-gray-700">
-              <a className="py-3 flex items-center" href="/">
+              <Link className="py-3 flex items-center" to="/dashboard/addprojects">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -72,8 +72,8 @@ const Sideber = () => {
                     d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                   />
                 </svg>
-                Roles
-              </a>
+                Add Projects
+              </Link>
             </li>
 
           </ul>
