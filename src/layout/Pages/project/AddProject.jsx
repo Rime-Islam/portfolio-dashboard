@@ -1,12 +1,15 @@
-import { toast } from "sonner";
-// import { useNavigate } from "react-router-dom"; 
+import { toast } from "sonner"; 
+import { useState } from "react";
 import { useAddProject } from "../../../hooks/projects/projects.hook";
 import { uploadImagesToCloudinary } from "../../../lib/uploadImageArray";
 import ManageProject from "./ManageProject";
 import { useGetAllSkill } from "../../../hooks/skills/skills.hook";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 
 const AddProject = () => {
-    // const navigate = useNavigate();
+     const [editorContent, setEditorContent] = useState('');
     const { data } = useGetAllSkill();
     const { mutate } = useAddProject();
 
@@ -18,7 +21,7 @@ const AddProject = () => {
         const client = e.target.client.value;
         const server = e.target.server.value;
         const live = e.target.live.value;
-        const description = e.target.description.value;
+        const description = editorContent;
 
         const uploads = await uploadImagesToCloudinary(files);
     
@@ -105,17 +108,17 @@ const AddProject = () => {
       className="input input-bordered"
     />
   </div>
-<div className="form-control">
+<div className="form-control mb-8">
   <label className="label">
     <span className="label-text">Project Description</span>
   </label>
-  <textarea
-    name="description"
-    placeholder="Enter the project description"
-    className="textarea textarea-bordered"
-    rows="5"
-    required
-  ></textarea>
+  <ReactQuill
+                      value={editorContent}
+                      onChange={setEditorContent}
+                      theme="snow"
+                      className="h-96 bg-white text-gray-700"
+                      placeholder="Write your post description here..."
+                    />
 </div>
         <div className="form-control mt-6">
         <button type="submit" className="btn btn-success">Add Project</button>

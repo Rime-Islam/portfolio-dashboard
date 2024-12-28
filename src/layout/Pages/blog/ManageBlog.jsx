@@ -1,23 +1,21 @@
 import { useState } from "react";
 import {
-    useGetAllProject,
-    useEditProject,
-  useDeleteProject,
-} from "../../../hooks/projects/projects.hook";
+    useGetAllBlog,
+    useEditBlog,
+  useDeleteBlog,
+} from "../../../hooks/blogs/blogs.hook";
 import { uploadImagesToCloudinary } from "../../../lib/uploadImageArray";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { useGetAllSkill } from "../../../hooks/skills/skills.hook";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 
-const ManageProject = () => {
+const ManageBlog = () => {
     const [editorContent, setEditorContent] = useState('');
-    const { data: skill } = useGetAllSkill();
-  const { data } = useGetAllProject();
-   const { mutate: edit } = useEditProject();
-  const { mutate } = useDeleteProject();
+    const { data } = useGetAllBlog();
+   const { mutate: edit } = useEditBlog();
+  const { mutate } = useDeleteBlog();
   const [selectedProject, setSelectedProject] = useState(null);
 
   const handleEditClick = (skill) => {
@@ -37,7 +35,7 @@ const ManageProject = () => {
     const files = e.target.photo.files;
 
     try {
-      let uploadedImage = selectedProject.photo; // Default to existing image
+      let uploadedImage = selectedProject.photo; 
       if (files && files.length > 0) {
         uploadedImage = await uploadImagesToCloudinary(files);
       }
@@ -47,34 +45,34 @@ const ManageProject = () => {
         data: {
           name,
           description,
-          photo: uploadedImage[0], // Assuming `uploadImagesToCloudinary` returns an array
+          photo: uploadedImage[0], 
         },
       };
 
       edit(payload, {
         onSuccess: () => {
-          toast.success("Project updated successfully");
+          toast.success("Blog updated successfully");
           handleCloseModal();
         },
         onError: (error) => {
-          console.error("Failed to update project", error);
-          toast.error("Failed to update project");
+          console.error("Failed to update Blog", error);
+          toast.error("Failed to update Blog");
         },
       });
     } catch (error) {
-      console.error("Error uploading project image:", error);
-      toast.error("Error uploading project image");
+      console.error("Error uploading Blog image:", error);
+      toast.error("Error uploading Blog image");
     }
   };
 
   const handleDelete = (id) => {
     mutate(id, {
       onSuccess: () => {
-        toast.success("Project deleted successfully.");
+        toast.success("Blog deleted successfully.");
         handleCloseModal();
       },
       onError: (err) => {
-        console.error("Failed to delete project:", err);
+        console.error("Failed to delete Blog:", err);
       },
     });
   };
@@ -116,7 +114,7 @@ const ManageProject = () => {
               </div>
             </div>
           )) : (
-            <p>No Project available</p>
+            <p>No Blog available</p>
           )
           
           }
@@ -130,88 +128,32 @@ const ManageProject = () => {
            <form onSubmit={handleUpdateProject} className="card-body">
            <div className="form-control">
              <label className="label">
-               <span className="label-text">Project Name</span>
+               <span className="label-text">Blog Name</span>
              </label>
              <input type="text" name="name" defaultValue={selectedProject.name} placeholder="Enter Your Skill name" className="input input-bordered" required />
            </div>
            <div className="form-control">
      <label htmlFor="photo" className="label">
-       <span className="label-text">Project Image</span>
+       <span className="label-text">Blog Image</span>
      </label>
      <input type="file" id="photo" name="photo" accept="image/*" required />
    </div>
-   <div className="form-control">
-       <label className="label">
-         <span className="label-text">Technology Used</span>
-       </label>
-       <div className="checkbox-group">
-         {skill?.data?.length && skill?.data?.map((skill) => (
-           <label key={skill._id} className="flex items-center space-x-2">
-             <input
-               type="checkbox"
-               name="features"
-               value={skill._id}
-               className="checkbox"
-             />
-             <span className="label-text">{skill.skillName}</span>
-           </label>
-         ))}
-       </div>
-     </div>
-   
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Git Client</span>
-       </label>
-       <input
-         type="text"
-         name="client"
-         defaultValue={selectedProject.client}
-         placeholder="Enter Git Client"
-         className="input input-bordered"
-       />
-     </div>
-   
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Git Server</span>
-       </label>
-       <input
-         type="text"
-         name="server"
-         defaultValue={selectedProject.server}
-         placeholder="Enter Git Server"
-         className="input input-bordered"
-       />
-     </div>
-   
-     <div className="form-control">
-       <label className="label">
-         <span className="label-text">Live Link</span>
-       </label>
-       <input
-         type="text"
-         name="live"
-         defaultValue={selectedProject.live}
-         placeholder="Enter Live Link"
-         className="input input-bordered"
-       />
-     </div>
-   <div className="form-control">
+
+   <div className="form-control mb-8">
      <label className="label">
-       <span className="label-text">Project Description</span>
+       <span className="label-text">Blog Description</span>
      </label>
-      <ReactQuill
-                           value={editorContent}
-                           onChange={setEditorContent}
-                           defaultValue={selectedProject.description}
-                           theme="snow"
-                           className="h-96 bg-white text-gray-700"
-                           placeholder="Write your post description here..."
-                         />
+     <ReactQuill
+                        value={editorContent}
+                        onChange={setEditorContent}
+                        defaultValue={editorContent}
+                        theme="snow"
+                        className=" h-72 bg-white text-gray-700"
+                        placeholder="Write your post description here..."
+                      />
    </div>
            <div className="form-control mt-6">
-           <button type="submit" className="btn btn-success">Edit Project</button>
+           <button type="submit" className="btn btn-success">Edit Blog</button>
            </div>
          </form>
           )}
@@ -226,4 +168,4 @@ const ManageProject = () => {
   );
 };
 
-export default ManageProject;
+export default ManageBlog;

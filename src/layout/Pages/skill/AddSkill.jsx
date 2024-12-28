@@ -1,11 +1,9 @@
 import { toast } from "sonner";
-// import { useNavigate } from "react-router-dom"; 
 import { useAddSkill } from "../../../hooks/skills/skills.hook";
 import { uploadImagesToCloudinary } from "../../../lib/uploadImageArray";
 import ManageSkills from "./ManageSkills";
 
 const AddSkill = () => {
-    // const navigate = useNavigate();
     const { mutate } = useAddSkill();
 
     const handleLogin = async(e) => {

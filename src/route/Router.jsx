@@ -6,6 +6,7 @@ import Home from "../layout/Pages/Home";
 import Login from "../layout/Pages/auth/Login";
 import AddSkill from "../layout/Pages/skill/AddSkill";
 import AddProject from "../layout/Pages/project/AddProject";
+import AddBlog from "../layout/Pages/blog/AddBlog";
 
 const myRouter = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const myRouter = createBrowserRouter([
         {
             path: 'addprojects',
             element: <AddProject />
+        },
+        {
+            path: 'addblog',
+            element: <AddBlog />
         },
     ],
     
