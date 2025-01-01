@@ -31,7 +31,7 @@ const ManageBlog = () => {
   const handleUpdateProject = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const description = e.target.description.value;
+    const description = editorContent;
     const files = e.target.photo.files;
 
     try {
@@ -130,13 +130,13 @@ const ManageBlog = () => {
              <label className="label">
                <span className="label-text">Blog Name</span>
              </label>
-             <input type="text" name="name" defaultValue={selectedProject.name} placeholder="Enter Your Skill name" className="input input-bordered" required />
+             <input type="text" name="name" defaultValue={selectedProject.name} placeholder="Enter Your Skill name" className="input input-bordered"  required/>
            </div>
            <div className="form-control">
      <label htmlFor="photo" className="label">
        <span className="label-text">Blog Image</span>
      </label>
-     <input type="file" id="photo" name="photo" accept="image/*" required />
+     <input type="file" id="photo" name="photo" accept="image/*"  required/>
    </div>
 
    <div className="form-control mb-8">
@@ -146,7 +146,6 @@ const ManageBlog = () => {
      <ReactQuill
                         value={editorContent}
                         onChange={setEditorContent}
-                        defaultValue={editorContent}
                         theme="snow"
                         className=" h-72 bg-white text-gray-700"
                         placeholder="Write your post description here..."

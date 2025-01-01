@@ -19,7 +19,7 @@ export const getAllBlog = async () => {
   }
 };
 
-export const getSingleBlog = async (id) => {
+export const getSigleBlog = async (id) => {
   try {
     const response = await axiosInstance.get(`/blogs/${id}`);
     return response.data;

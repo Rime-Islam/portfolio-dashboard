@@ -13,6 +13,7 @@ import 'react-quill/dist/quill.snow.css';
 
 
 const ManageProject = () => {
+  const [selectedFeatures, setSelectedFeatures] = useState([]);
     const [editorContent, setEditorContent] = useState('');
     const { data: skill } = useGetAllSkill();
   const { data } = useGetAllProject();
@@ -30,11 +31,23 @@ const ManageProject = () => {
     document.getElementById("my_modal_1").close();
   };
 
+  const handleFeatureChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelectedFeatures((prev) => [...prev, value]);
+    } else {
+      setSelectedFeatures((prev) => prev.filter((feature) => feature !== value));
+    }
+  };
+
   const handleUpdateProject = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const description = e.target.description.value;
     const files = e.target.photo.files;
+    const client = e.target.client.value;
+    const server = e.target.server.value;
+    const live = e.target.live.value;
+    const description = editorContent;
 
     try {
       let uploadedImage = selectedProject.photo; // Default to existing image
@@ -46,6 +59,10 @@ const ManageProject = () => {
         id: selectedProject._id,
         data: {
           name,
+          client,
+          server,
+          live,
+          features: selectedFeatures,
           description,
           photo: uploadedImage[0], // Assuming `uploadImagesToCloudinary` returns an array
         },
@@ -150,8 +167,9 @@ const ManageProject = () => {
              <input
                type="checkbox"
                name="features"
-               value={skill._id}
+               value={skill.skillName}
                className="checkbox"
+               onChange={handleFeatureChange}
              />
              <span className="label-text">{skill.skillName}</span>
            </label>
@@ -196,8 +214,8 @@ const ManageProject = () => {
          placeholder="Enter Live Link"
          className="input input-bordered"
        />
-     </div>
-   <div className="form-control">
+     </div> 
+   <div className="form-control bg-white">
      <label className="label">
        <span className="label-text">Project Description</span>
      </label>
@@ -206,7 +224,7 @@ const ManageProject = () => {
                            onChange={setEditorContent}
                            defaultValue={selectedProject.description}
                            theme="snow"
-                           className="h-96 bg-white text-gray-700"
+                           className="h-96 mb-8  text-gray-700"
                            placeholder="Write your post description here..."
                          />
    </div>

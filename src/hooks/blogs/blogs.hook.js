@@ -3,7 +3,7 @@ import {
     deleteSingleBlog,
     editSingleBlog,
     getAllBlog,
-
+    getSigleBlog
   } from "../../service/blog.service";
   import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
   
@@ -55,11 +55,11 @@ import {
   };
   
   // Get Single Blog Hook
-  // export const useGetSingleBlog = (id) => {
-  //   return useQuery({
-  //     enabled: !!id,
-  //     queryKey: ["getSingleBlog", id],
-  //     queryFn: () => getSigleBlog(id),
-  //   });
-  // };
+  export const useGetSingleBlog = (id) => {
+    return useQuery({
+      enabled: !!id,
+      queryKey: ["getSingleBlog", id],
+      queryFn: () => getSigleBlog(id),
+    });
+  };
   

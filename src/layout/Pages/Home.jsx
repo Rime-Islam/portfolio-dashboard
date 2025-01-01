@@ -11,7 +11,7 @@ const Home = () => {
 <Sideber />
 </div>
 
-<div className="p-4">
+<div className="p-4 ">
 <Outlet></Outlet>
 </div>
     
