@@ -8,7 +8,7 @@ const SingleBlog = () => {
     const { id } = useParams();
     const { data } = useGetSingleBlog(id);
 
-console.log()
+
     return (
     
     <div className="p-5">

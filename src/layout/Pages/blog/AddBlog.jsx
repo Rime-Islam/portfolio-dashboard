@@ -24,7 +24,7 @@ const AddBlog = () => {
               {
                 onSuccess: () => {
                     toast.success("Blog Added");
-                    location.reload();
+             
                 },
               }
             );

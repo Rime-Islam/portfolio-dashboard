@@ -38,7 +38,7 @@ const AddProject = () => {
       {
         onSuccess: () => {
           toast.success("Project Added");
-          location.reload();
+     
         },
       }
     );

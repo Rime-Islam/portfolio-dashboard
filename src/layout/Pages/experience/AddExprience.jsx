@@ -54,7 +54,7 @@ const AddExperience = () => {
       {
         onSuccess: () => {
           toast.success("Experience Added");
-          location.reload();
+       
         },
       }
     );
